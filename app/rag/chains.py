@@ -86,7 +86,6 @@ def build_rag_chain(index_dir: str, top_k: int = 5):
         # --- Step 3: Final Answer Generation (Flexible Language) ---
         context_str = _format_context(docs)
         
-        # التعديل هنا ليكون الرد بنفس لغة السؤال
         final_prompt = f"""
         You are an expert assistant. Use the following context to answer the question.
         

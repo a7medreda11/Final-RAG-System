@@ -4,7 +4,6 @@ import shutil
 import gradio as gr
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
 # Path configuration

@@ -3,7 +3,6 @@ from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
-# Importing the embedding model and builder from the local vectorstore module
 from app.rag.vectorstore import EMB, build_vectorstore 
 from .loaders import load_document_text
 

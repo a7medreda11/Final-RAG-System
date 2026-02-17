@@ -3,10 +3,7 @@ import google.generativeai as genai
 from typing import Dict, List, Tuple
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# =========================
-# Conversation Memory Store
-# =========================
-# Dictionary to store chat history per session_id
+
 _STORE: Dict[str, List[Tuple[str, str]]] = {}
 
 def add_turn(session_id: str, role: str, content: str, max_turns: int = 12) -> None:
