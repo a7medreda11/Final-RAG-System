@@ -25,7 +25,7 @@ UPLOAD_FOLDER = os.path.join(parent_dir, "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Google API Key
-os.environ["GOOGLE_API_KEY"] = "AIzaSyDfkB1u_Y5hX_8fMRQMEMiET6K-c39Djus"
+os.environ["GOOGLE_API_KEY"] = "AIzaSyCL48kd9nkbEO1BIQE7Nw_L0Yxt8S0ZBaE"
 
 current_chain = None
 processed_docs = [] 
