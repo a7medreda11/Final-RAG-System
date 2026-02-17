@@ -81,11 +81,9 @@ def summarize_file():
         return "⚠️ You must upload and process a file before summarization."
     
     try:
-        # بدل ما نكتب الإسم يدوياً، هنستخدم الدالة اللي عملناها بتنقي الموديل الصح
         from app.rag.memory import get_llm
         llm = get_llm() 
         
-        # دمج محتوى المستند (أول 15 قطعة)
         context_text = "\n".join([d.page_content for d in processed_docs[:15]])
         
         prompt = f"""Provide a comprehensive and professional summary of the following text. 
