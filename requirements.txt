@@ -1,0 +1,16 @@
+langchain==0.2.0
+langchain-community==0.2.0
+langchain-core==0.2.0
+langchain-google-genai
+langchain-chroma
+langchain-huggingface
+chromadb
+fastapi
+uvicorn
+langserve[all]
+sse-starlette
+gradio
+pypdf
+sentence-transformers
+python-dotenv
+requests
