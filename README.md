@@ -1,42 +1,53 @@
-🤖 Smart RAG Chatbot: Context-Aware AI Assistant
-This project is a sophisticated Retrieval-Augmented Generation (RAG) system. It enables users to upload private documents (PDFs, Text) and interact with them through a conversational AI interface. By anchoring the Google Gemini LLM to a local vector database, the system provides factual, source-based answers, effectively eliminating AI hallucinations.
+# 🤖 Smart-RAG: Context-Aware Document Intelligence System
 
-🌟 Key Features
-Dynamic Document Context: Answers questions based strictly on uploaded data.
+[![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://www.python.org/)
+[![Framework](https://img.shields.io/badge/Framework-LangChain-green.svg)](https://www.langchain.com/)
+[![AI-Model](https://img.shields.io/badge/LLM-Gemini--1.5--Flash-orange.svg)](https://deepmind.google/technologies/gemini/)
+[![Database](https://img.shields.io/badge/VectorDB-ChromaDB-red.svg)](https://www.trychroma.com/)
 
-Hybrid Model Strategy: Utilizes Gemini 1.5/2.5 Flash for fast user interactions and Gemini 1.5 Pro for rigorous evaluation.
+**Smart-RAG** is a high-performance Retrieval-Augmented Generation system designed to transform static documents into interactive knowledge bases. By leveraging **Google Gemini's** advanced reasoning and **ChromaDB's** vector search, this system provides factual, context-grounded answers while strictly mitigating AI hallucinations.
 
-Persistent Vector Memory: Uses ChromaDB to store document embeddings for lightning-fast retrieval.
+---
 
-Semantic Search: Powered by HuggingFace Transformers to understand the meaning behind questions, not just keywords.
+## 🎯 Key Features
 
-Conversation Memory: Maintains a sliding window of chat history to handle follow-up questions naturally.
+* **Semantic Intelligence:** Uses **HuggingFace Transformers** to understand the deep meaning of queries, not just keywords.
+* **Fact-Grounded Responses:** Employs RAG architecture to ensure every answer is backed by your uploaded PDF/Text data.
+* **Dual-Speed Logic:** Built with **Gemini 1.5 Flash** for ultra-fast chat responses and **Gemini 1.5 Pro** for high-precision evaluation.
+* **Automated Evaluation (LLM-as-a-Judge):** Includes a built-in testing pipeline that scores answer accuracy and provides logical justifications.
+* **Conversational Memory:** Maintains a sliding-window context to handle complex, multi-turn dialogues seamlessly.
 
-Automated Evaluation: Includes a dedicated evaluation pipeline (LLM-as-a-Judge) to score answer accuracy.
+---
 
-🏗️ System Architecture & Workflow
-Ingestion Phase:
+## 🛠️ Technical Architecture
 
-Documents are loaded and split into smaller, overlapping chunks (Chunking).
+| Layer | Technology |
+| :--- | :--- |
+| **Orchestration** | **LangChain** (Chains & Memory Management) |
+| **Large Language Model** | **Google Gemini API** (Flash & Pro versions) |
+| **Embedding Engine** | **HuggingFace** (`all-MiniLM-L6-v2`) |
+| **Vector Storage** | **ChromaDB** (Local Persistent Storage) |
+| **Backend / UI** | **FastAPI** + **Gradio** Interactive Interface |
 
-Each chunk is converted into a numerical vector (Embedding) using HuggingFace models.
+---
 
-Vectors are stored in ChromaDB.
+## 🚀 System Workflow
 
-Retrieval Phase:
+1.  **Ingestion:** Documents are parsed and split into semantic chunks with optimized overlap.
+2.  **Embedding:** Text chunks are transformed into high-dimensional vectors.
+3.  **Retrieval:** At query time, the system retrieves the Top-K most relevant context pieces from the vector store.
+4.  **Generation:** The LLM synthesizes a final response based *exclusively* on the retrieved context.
+5.  **Evaluation:** The system runs a comparison between the AI's output and human-verified "Ground Truth" to ensure quality.
 
-When a user asks a question, the system converts the query into a vector.
+---
 
-It performs a Similarity Search in ChromaDB to find the most relevant document segments.
+## 📁 Project Structure
 
-Generation Phase:
-
-The retrieved segments (Context) and the user's question are injected into a specialized Prompt Template.
-
-The LLM generates a concise answer based only on the provided context.
-
-Evaluation Phase:
-
-The system compares generated answers against a Ground Truth dataset.
-
-A "Judge" LLM (Gemini Pro) assigns a score (0-10) and provides reasoning for the grade.
+```text
+Final_RAG/
+├── app/
+│   ├── rag/           # Core RAG Logic (Chains, Memory, Ingestion)
+│   ├── eval/          # Automated Evaluation Pipeline & Dataset
+│   └── main.py        # FastAPI Server & Gradio UI
+├── chroma_db/         # Local Vector Store (Excluded from Git tracking)
+└── requirements.txt   # Production Dependencies
