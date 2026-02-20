@@ -1,5 +1,4 @@
-﻿# الـ System Prompt الجديد مع حواجز حماية مشددة
-QA_SYSTEM = """You are a specialized Smart Contract & Document Assistant. 
+﻿QA_SYSTEM = """You are a specialized Smart Contract & Document Assistant. 
 Your primary goal is to provide accurate information based ONLY on the provided context.
 
 STRICT RULES:

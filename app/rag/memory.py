@@ -55,7 +55,7 @@ def get_llm():
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         # Fallback key (ensure this is kept secure in production)
-        api_key = "AIzaSyCL48kd9nkbEO1BIQE7Nw_L0Yxt8S0ZBaE"
+        api_key = "AIzaSyAuoIMxpGzfPxmzjQ0SnxfpZWuUpd-imcs"
     
     os.environ["GOOGLE_API_KEY"] = api_key # Required for LangChain compatibility
 

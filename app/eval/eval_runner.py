@@ -4,12 +4,10 @@ import json
 import time
 
 # --- Absolute Paths Setup ---
-# Get the full path of the project root directory (Final_RAG)
-current_dir = os.path.dirname(os.path.abspath(__file__)) # Currently in 'eval' folder
-root_dir = os.path.dirname(os.path.dirname(current_dir)) # Go up to 'Final_RAG'
+current_dir = os.path.dirname(os.path.abspath(__file__)) 
+root_dir = os.path.dirname(os.path.dirname(current_dir)) 
 sys.path.append(root_dir)
 
-# Import necessary components
 try:
     from app.rag.chains import build_rag_chain
     from langchain_google_genai import ChatGoogleGenerativeAI
@@ -18,24 +16,25 @@ except ImportError as e:
     sys.exit(1)
 
 def run_evaluation():
-    # Define paths accurately
     db_path = os.path.join(root_dir, "chroma_db")
     dataset_path = os.path.join(current_dir, "dataset.jsonl")
     
-    # Confirm database existence before starting
     if not os.path.exists(db_path):
         print(f"❌ Error: Database not found at: {db_path}")
-        print("💡 Tip: Please upload and process a document via the Gradio interface first.")
         return
 
     print(f"✅ Database found at: {db_path}")
     
-    # 1. Load the RAG chain (uses Gemini by default)
     print("🤖 Loading RAG chain...")
     rag_chain = build_rag_chain(index_dir=db_path)
     
-    # 2. Setup the Judge LLM
-    judge_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash")
+
+    api_key = os.environ.get("GOOGLE_API_KEY") or "AIzaSyAuoIMxpGzfPxmzjQ0SnxfpZWuUpd-imcs"
+    judge_llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-flash", 
+        google_api_key=api_key, 
+        temperature=0.0
+    )
 
     print("🚀 Starting updated evaluation process...")
 
@@ -73,9 +72,8 @@ def run_evaluation():
                 """
                 
                 eval_output = judge_llm.invoke(prompt).content
-                print(f"⭐ Evaluation Result: {eval_output}")
+                print(f"⭐ Evaluation Result:\n{eval_output}")
                 
-                # Sleep to avoid Rate Limits (Quota)
                 time.sleep(5) 
 
             except Exception as e:
